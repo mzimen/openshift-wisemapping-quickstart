@@ -2,6 +2,27 @@ openshift-wisemapping-quickstart
 ================================
 
 
+You can either just clone this repo for openshift
+or 
+just hack your own version of wisemapping with steps below
+
+Cloning for OpenShift
+---------------------
+
+1. Create an JBossEAP app named wisemapping
+2. Embed with MySQL
+3. Clone app into local directory
+4. Add remote github source
+
+<pre>
+git remote add upstream -m master https://github.com/mzimen/openshift-wisemapping-quickstart.git
+git pull -s recursive -X theirs upstream master
+git push
+</pre>
+
+5. Wait and test
+
+
 Hacking for OpenShift
 ---------------------
 
@@ -9,20 +30,26 @@ Hacking for OpenShift
 2. Embed with MySQL
 3. Clone your app into local directory
 
-  git clone $SSH\_URL\_FROM\_OPENSHIFT\_CONSOLE
+```bash
+git clone $SSH\_URL\_FROM\_OPENSHIFT\_CONSOLE
+```
 
 3. Download the zip file from http://www.wisemapping.org into /tmp/
 
 4. Unzip the archive  into cloned directory
 
-  cd wisemapping/src/main/
-  unzip /tmp/wisemapping\*zip 
+```bash
+cd wisemapping/src/main/
+unzip /tmp/wisemapping\*zip 
+```
 
 5. Hack the hierarchy in the current directory
   
-   > mkdir webapp
-   > mv webapps/wisemapping/\* webapp
-   > rm -rf webapps
+```bash
+mkdir webapp
+mv webapps/wisemapping/*  webapp/
+rm -rf webapps
+```
 
 
 6. Edit /src/main/webapp/WEB-INF/app.properties 
@@ -47,25 +74,30 @@ Hacking for OpenShift
     #database.validation.query=
     </pre>
 
-7. Action hook for mysql config : .openshift/action\_hooks/pre\_build 
+7. Action hook for mysql config .openshift/action_hooks/pre_build 
 
-    <pre>
-    sed -i -e "s/OPENSHIFT_MYSQL_DB_PORT/$OPENSHIFT_MYSQL_DB_PORT/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
-    sed -i -e "s/OPENSHIFT_MYSQL_DB_HOST/$OPENSHIFT_MYSQL_DB_HOST/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
-    sed -i -e "s/OPENSHIFT_MYSQL_DB_USERNAME/$OPENSHIFT_MYSQL_DB_USERNAME/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
-    sed -i -e "s/OPENSHIFT_MYSQL_DB_PASSWORD/$OPENSHIFT_MYSQL_DB_PASSWORD/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
-    
-    cd $OPENSHIFT_REPO_DIR/src/main/config/mysql/
-    mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD < create-schemas.sql
-    mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD < test-data.sql
-    </pre>
+```bash
+sed -i -e "s/OPENSHIFT_MYSQL_DB_PORT/$OPENSHIFT_MYSQL_DB_PORT/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
+sed -i -e "s/OPENSHIFT_MYSQL_DB_HOST/$OPENSHIFT_MYSQL_DB_HOST/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
+sed -i -e "s/OPENSHIFT_MYSQL_DB_USERNAME/$OPENSHIFT_MYSQL_DB_USERNAME/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
+sed -i -e "s/OPENSHIFT_MYSQL_DB_PASSWORD/$OPENSHIFT_MYSQL_DB_PASSWORD/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
 
+cd $OPENSHIFT_REPO_DIR/src/main/config/mysql/
+mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD < create-schemas.sql
+mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD < test-data.sql
+```
 
-8. git 
+8. Git  upload
 
-   git add .
-   git commit -m  "initial commit"
-   git push
+```bash
+git add .
+git commit -m  "initial commit"
+git push
+```
 
-7. wait for the app and do login
+7. Wait for the app and do login
+
+8. For troubleshooting try:
+
+rhc tail wisemapping 
 
