@@ -28,33 +28,37 @@ Hacking for OpenShift
 6. Edit /src/main/webapp/WEB-INF/app.properties 
    (enable MySQL and disable HSQL)
 
-    > # MySQL 5.X configuration properties
-    > database.url=jdbc:mysql://OPENSHIFT_MYSQL_DB_HOST:OPENSHIFT_MYSQL_DB_PORT/wisemapping?useUnicode=yes&characterEncoding=UTF-8
-    > database.driver=com.mysql.jdbc.Driver
-    > database.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
-    > database.username=OPENSHIFT_MYSQL_DB_USERNAME
-    > database.password=OPENSHIFT_MYSQL_DB_PASSWORD
-    > database.validation.enabled=true
-    > database.validation.query=SELECT 1
-    > # HSQL Configuration properties
-    > #database.url=jdbc:hsqldb:file:webapps/wisemapping/WEB-INF/database/wisemapping
-    > #database.driver=org.hsqldb.jdbc.JDBCDriver
-    > #database.hibernate.dialect=org.hibernate.dialect.HSQLDialect
-    > #database.username=sa
-    > #database.password=
-    > #database.validation.enabled=false
-    > #database.validation.query=
+    <pre>
+    # MySQL 5.X configuration properties
+    database.url=jdbc:mysql://OPENSHIFT_MYSQL_DB_HOST:OPENSHIFT_MYSQL_DB_PORT/wisemapping?useUnicode=yes&characterEncoding=UTF-8
+    database.driver=com.mysql.jdbc.Driver
+    database.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+    database.username=OPENSHIFT_MYSQL_DB_USERNAME
+    database.password=OPENSHIFT_MYSQL_DB_PASSWORD
+    database.validation.enabled=true
+    database.validation.query=SELECT 1
+    # HSQL Configuration properties
+    #database.url=jdbc:hsqldb:file:webapps/wisemapping/WEB-INF/database/wisemapping
+    #database.driver=org.hsqldb.jdbc.JDBCDriver
+    #database.hibernate.dialect=org.hibernate.dialect.HSQLDialect
+    #database.username=sa
+    #database.password=
+    #database.validation.enabled=false
+    #database.validation.query=
+    </pre>
 
-7. Action hook for mysql config : .openshift/action_hooks/pre_build 
+7. Action hook for mysql config : .openshift/action\_hooks/pre\_build 
 
-    > sed -i -e "s/OPENSHIFT_MYSQL_DB_PORT/$OPENSHIFT_MYSQL_DB_PORT/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
-    > sed -i -e "s/OPENSHIFT_MYSQL_DB_HOST/$OPENSHIFT_MYSQL_DB_HOST/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
-    > sed -i -e "s/OPENSHIFT_MYSQL_DB_USERNAME/$OPENSHIFT_MYSQL_DB_USERNAME/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
-    > sed -i -e "s/OPENSHIFT_MYSQL_DB_PASSWORD/$OPENSHIFT_MYSQL_DB_PASSWORD/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
-    >
-    > cd $OPENSHIFT_REPO_DIR/src/main/config/mysql/
-    > mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD < create-schemas.sql
-    > mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD < test-data.sql
+    <pre>
+    sed -i -e "s/OPENSHIFT_MYSQL_DB_PORT/$OPENSHIFT_MYSQL_DB_PORT/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
+    sed -i -e "s/OPENSHIFT_MYSQL_DB_HOST/$OPENSHIFT_MYSQL_DB_HOST/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
+    sed -i -e "s/OPENSHIFT_MYSQL_DB_USERNAME/$OPENSHIFT_MYSQL_DB_USERNAME/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
+    sed -i -e "s/OPENSHIFT_MYSQL_DB_PASSWORD/$OPENSHIFT_MYSQL_DB_PASSWORD/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
+    
+    cd $OPENSHIFT_REPO_DIR/src/main/config/mysql/
+    mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD < create-schemas.sql
+    mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD < test-data.sql
+    </pre>
 
 
 8. git 
