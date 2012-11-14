@@ -13,24 +13,21 @@ Cloning for OpenShift
 2. Embed with MySQL
 3. Clone app into local directory
 4. Add remote github source
-
 <pre>
 git remote add upstream -m master https://github.com/mzimen/openshift-wisemapping-quickstart.git
 git pull -s recursive -X theirs upstream master
 git push
-
 </pre>
-
 5. Wait and test
-
 6. Temporary hack for mysql initialization (do after budiling)
    TODO: needs to be fixed soon
 
 ```bash
-hack
+ssh $your_application_url
 cd $OPENSHIFT_REPO_DIR/src/main/config/mysql
 mysql -u $OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD $OPENSHIFT_APP_NAME < create-schemas.sql
 ```
+
 
 Hacking for OpenShift
 ---------------------
