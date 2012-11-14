@@ -7,8 +7,8 @@
 grant { 
 
    // allows anyone to listen on un-privileged ports
-   permission java.net.SocketPermission "localhost:1024-", "listen";
-   permission java.net.SocketPermission "localhost:1024-", "accept"; 
+   permission java.net.SocketPermission "127.0.0.1:1024-", "listen";
+   permission java.net.SocketPermission "127.0.0.1:1024-", "accept"; 
 
    permission java.security.SecurityPermission "putProviderProperty.SunJCE";
    permission java.util.PropertyPermission "org.eclipse.jetty.io.nio.JVMBUG_THRESHHOLD", "read, write";
