@@ -14,6 +14,6 @@
 # throughout the system.
 
 cd $OPENSHIFT_REPO_DIR/src/main/config/mysql/
-mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD wisemapping < create-schemas.sql
-mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD wisemapping < test-data.sql
+mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD $OPENSHIFT_APP_NAME < create-schemas.sql
+mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD $OPENSHIFT_APP_NAME < test-data.sql
 
