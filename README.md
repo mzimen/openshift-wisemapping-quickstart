@@ -31,7 +31,7 @@ Hacking for OpenShift
 3. Clone your app into local directory
 
 ```bash
-git clone $SSH\_URL\_FROM\_OPENSHIFT\_CONSOLE
+git clone $SSH_URL_FROM_OPENSHIFT_CONSOLE
 ```
 
 3. Download the zip file from http://www.wisemapping.org into /tmp/
@@ -83,15 +83,16 @@ sed -i -e "s/OPENSHIFT_MYSQL_DB_USERNAME/$OPENSHIFT_MYSQL_DB_USERNAME/" $OPENSHI
 sed -i -e "s/OPENSHIFT_MYSQL_DB_PASSWORD/$OPENSHIFT_MYSQL_DB_PASSWORD/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
 
 cd $OPENSHIFT_REPO_DIR/src/main/config/mysql/
-mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD < create-schemas.sql
-mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD < test-data.sql
+mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD wisemapping < create-schemas.sql
+mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD wisemapping < test-data.sql
 ```
 
 8. Git  upload
 
 ```bash
+cd wisemapping/
 git add .
-git commit -m  "initial commit"
+git commit -a -m  "initial commit"
 git push
 ```
 
