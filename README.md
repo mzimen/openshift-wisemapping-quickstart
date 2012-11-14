@@ -63,7 +63,7 @@ rm -rf webapps
 
     <pre>
     # MySQL 5.X configuration properties
-    database.url=jdbc:mysql://OPENSHIFT_MYSQL_DB_HOST:OPENSHIFT_MYSQL_DB_PORT/wisemapping?useUnicode=yes&characterEncoding=UTF-8
+    database.url=jdbc:mysql://OPENSHIFT_MYSQL_DB_HOST:OPENSHIFT_MYSQL_DB_PORT/OPENSHIFT_APP_NAME?useUnicode=yes&characterEncoding=UTF-8
     database.driver=com.mysql.jdbc.Driver
     database.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
     database.username=OPENSHIFT_MYSQL_DB_USERNAME
@@ -87,10 +87,11 @@ sed -i -e "s/OPENSHIFT_MYSQL_DB_PORT/$OPENSHIFT_MYSQL_DB_PORT/" $OPENSHIFT_REPO_
 sed -i -e "s/OPENSHIFT_MYSQL_DB_HOST/$OPENSHIFT_MYSQL_DB_HOST/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
 sed -i -e "s/OPENSHIFT_MYSQL_DB_USERNAME/$OPENSHIFT_MYSQL_DB_USERNAME/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
 sed -i -e "s/OPENSHIFT_MYSQL_DB_PASSWORD/$OPENSHIFT_MYSQL_DB_PASSWORD/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
+sed -i -e "s/OPENSHIFT_APP_NAME/$OPENSHIFT_APP_NAME/" $OPENSHIFT_REPO_DIR/src/main/webapp/WEB-INF/app.properties
 
 cd $OPENSHIFT_REPO_DIR/src/main/config/mysql/
-mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD wisemapping < create-schemas.sql
-mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD wisemapping < test-data.sql
+mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD $OPENSHIFT_APP_NAME < create-schemas.sql
+mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD $OPENSHIFT_APP_NAME < test-data.sql
 ```
 
 8. Git  upload
